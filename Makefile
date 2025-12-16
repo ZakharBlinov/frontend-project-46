@@ -1,25 +1,20 @@
-install: deps-install
-	npx simple-git-hooks
-
-deps-install:
-	npm ci --legacy-peer-deps
-
-deps-update:
-	npx ncu -u
+install:
+	npm ci
 
 publish:
 	npm publish --dry-run
 
+run:
+	node bin/gendiff __fixtures__/file1.json __fixtures__/file2.json
+
 test:
 	npm test
 
-test-coverage: 
-	npm test -- --coverage --coverageProvider=v8
+test-coverage:
+	npx jest --coverage
 
 lint:
 	npx eslint .
 
-fix:
-	npx eslint --fix .
-
-.PHONY: test
+lint-fix:
+	npx eslint . --fix
